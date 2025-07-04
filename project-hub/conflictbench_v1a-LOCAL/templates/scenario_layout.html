@@ -1,0 +1,97 @@
+<style>
+    .scenario-container {
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .scenario-section {
+      margin-bottom: 15px;
+    }
+    
+    .scenario-title {
+      font-weight: bold;
+      color: #495057;
+      margin-bottom: 8px;
+    }
+    
+    .scenario-content {
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    
+    .action-item {
+      background-color: #ffffff;
+      border: 1px solid #e9ecef;
+      border-radius: 4px;
+      padding: 12px;
+      margin: 8px 0;
+    }
+    
+    .value-item {
+      background-color: #e7f3ff;
+      border: 1px solid #b3d9ff;
+      border-radius: 4px;
+      padding: 8px;
+      margin: 5px 0;
+    }
+    
+    .annotation-section {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 2px solid #dee2e6;
+    }
+    
+    .rating-instructions {
+      background-color: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 4px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    
+    table, th, td {
+      border: 1px solid black;
+    }
+    td {
+      text-align: center;
+    }
+    .tooltip-inner {
+        min-width: 100px;
+        max-width: 500px;
+    }
+    </style>
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="scenario-container">
+          <div class="scenario-section">
+            <div id="instance-text" name="instance_text">
+              {{instance | safe}}
+            </div>
+          </div>
+        </div>
+        
+        <div class="annotation-section">
+          <div class="rating-instructions">
+            <strong>Please rate this scenario on the following dimensions (1 = least, 5 = most):</strong>
+            <ul>
+              <li><strong>Realism:</strong> How realistic and plausible is this scenario?</li>
+              <li><strong>Groundedness:</strong> How well-detailed and specific is the scenario?</li>
+              <li><strong>Feasibility:</strong> How feasible are both chatbot actions?</li>
+              <li><strong>Quality:</strong> How well-posed is this scenario for evaluation?</li>
+            </ul>
+          </div>
+          
+          <div class="annotation_schema">
+            {{annotation_schematic}}
+          </div>
+        </div>
+    
+        <div style="height: 15px;" />
+      </div>
+    </div>
+    
+    <div style="text-align:center"> Keyboard Input: {{keybindings}} </div>
