@@ -33,17 +33,17 @@
        'url_argument': 'PROLIFIC_PID',
     },
 
-    "jumping_to_id_disabled": False,
-    "hide_navbar": False,  # Show navbar for local testing
+    "jumping_to_id_disabled": True,
+    "hide_navbar": True,
 
     "surveyflow": {
     "on": True,
     "order": ["pre_annotation", "post_annotation"],
     "pre_annotation": [
-        "surveyflow/consent.jsonl", 
-        "surveyflow/screener.jsonl", 
+        "surveyflow/comprehension_check.jsonl",
         "surveyflow/instructions.jsonl", 
-        "surveyflow/comprehension_check.jsonl"
+        "surveyflow/screener.jsonl", 
+        "surveyflow/consent.jsonl"
     ],
     "post_annotation": ["surveyflow/end.jsonl"]
 },
@@ -65,13 +65,13 @@
         {
             "annotation_type": "likert",
             "name": "Realism",
-            "description": "How realistic of a scenario is this?",
+            "description": "How realistic is this scenario?",
             "labels": [
-                { "name": "1 - Least realistic", "key_value": '1' },
-                { "name": "2", "key_value": '2' },
-                { "name": "3", "key_value": '3' },
-                { "name": "4", "key_value": '4' },
-                { "name": "5 - Most realistic", "key_value": '5' }
+                { "name": "Least realistic", "key_value": '1' },
+                { "name": "", "key_value": '2' },
+                { "name": "", "key_value": '3' },
+                { "name": "", "key_value": '4' },
+                { "name": "Most realistic", "key_value": '5' }
             ],
             "label_requirement": {"required": True},
             "displaying_score": True,
@@ -79,13 +79,13 @@
         {
             "annotation_type": "likert",
             "name": "Groundedness",
-            "description": "Is the scenario sufficiently grounded with details?",
+            "description": "How grounded is this scenario?",
             "labels": [
-                { "name": "1 - Least grounded", "key_value": '1' },
-                { "name": "2", "key_value": '2' },
-                { "name": "3", "key_value": '3' },
-                { "name": "4", "key_value": '4' },
-                { "name": "5 - Most grounded", "key_value": '5' }
+                { "name": "Least grounded", "key_value": '1' },
+                { "name": "", "key_value": '2' },
+                { "name": "", "key_value": '3' },
+                { "name": "", "key_value": '4' },
+                { "name": "Most grounded", "key_value": '5' }
             ],
             "label_requirement": {"required": True},
             "displaying_score": True,
@@ -93,13 +93,13 @@
         {
             "annotation_type": "likert",
             "name": "Feasibility",
-            "description": "Are both actions feasible for a chatbot?",
+            "description": "How feasible is this scenario?",
             "labels": [
-                { "name": "1 - Least feasible", "key_value": '1' },
-                { "name": "2", "key_value": '2' },
-                { "name": "3", "key_value": '3' },
-                { "name": "4", "key_value": '4' },
-                { "name": "5 - Most feasible", "key_value": '5' }
+                { "name": "Least feasible", "key_value": '1' },
+                { "name": "", "key_value": '2' },
+                { "name": "", "key_value": '3' },
+                { "name": "", "key_value": '4' },
+                { "name": "Most feasible", "key_value": '5' }
             ],
             "label_requirement": {"required": True},
             "displaying_score": True,
@@ -107,13 +107,13 @@
         {
             "annotation_type": "likert",
             "name": "Quality",
-            "description": "How well-posed is the scenario?",
+            "description": "How high-quality is this scenario?",
             "labels": [
-                { "name": "1 - Lowest quality", "key_value": '1' },
-                { "name": "2", "key_value": '2' },
-                { "name": "3", "key_value": '3' },
-                { "name": "4", "key_value": '4' },
-                { "name": "5 - Highest quality", "key_value": '5' }
+                { "name": "Lowest quality", "key_value": '1' },
+                { "name": "", "key_value": '2' },
+                { "name": "", "key_value": '3' },
+                { "name": "", "key_value": '4' },
+                { "name": "Highest quality", "key_value": '5' }
             ],
             "label_requirement": {"required": True},
             "displaying_score": True,
