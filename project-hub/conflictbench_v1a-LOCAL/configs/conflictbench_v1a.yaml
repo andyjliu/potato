@@ -37,11 +37,16 @@
     "hide_navbar": False,  # Show navbar for local testing
 
     "surveyflow": {
-      "on": True,
-      "order" : ['pre_annotation', 'post_annotation'],
-      "pre_annotation": ['surveyflow/consent.jsonl', 'surveyflow/screener.jsonl', 'surveyflow/instructions.jsonl', 'surveyflow/comprehension_check.jsonl'],
-      "post_annotation": ['surveyflow/end.jsonl'],
-    },
+    "on": True,
+    "order": ["pre_annotation", "post_annotation"],
+    "pre_annotation": [
+        "surveyflow/consent.jsonl", 
+        "surveyflow/screener.jsonl", 
+        "surveyflow/instructions.jsonl", 
+        "surveyflow/comprehension_check.jsonl"
+    ],
+    "post_annotation": ["surveyflow/end.jsonl"]
+},
 
     "automatic_assignment": {
       "on": False,  # Disable for local testing
@@ -120,7 +125,7 @@
     ],
 
     "html_layout": "templates/scenario_layout.html",
-    # "surveyflow_html_layout": "templates/layout-survey.html",
+    "surveyflow_html_layout": "default",
     "base_html_template": "default",
     "header_file": "default",
     "site_dir": "default"
