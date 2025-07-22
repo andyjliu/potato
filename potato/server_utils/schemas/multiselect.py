@@ -34,7 +34,7 @@ def generate_multiselect_layout(annotation_scheme):
     label_requirement = (
         annotation_scheme["label_requirement"] if "label_requirement" in annotation_scheme else None
     )
-    if label_requirement and label_requirement["required"]:
+    if label_requirement:
         validation = "required"
 
     # if right_label is provided, the associated label has to be clicked to proceed. This is normally used for consent questions at the beginning of a survey.
