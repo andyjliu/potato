@@ -390,88 +390,105 @@
        * along with any relevant key presses to request a new instance to
        * annotate.
        */
-      function validate_answers() {
+       function validate_answers() {
+    // Function to detect which page we're on based on content
+    function getPageType() {
+        const pageIdentifier = document.getElementById('page-identifier');
+        if (pageIdentifier) {
+            return pageIdentifier.getAttribute('data-page');
+        }
+        return 'default';
+    }
 
-          // check if all the right labels are checked
-          //alert({{instance_obj|tojson}}['id'])
-          var inputs =  document.querySelectorAll('input[validation=right_label]');
-          for (var i = 0; i < inputs.length; ++i) {
-            if (inputs[i].getAttribute('validation') == 'right_label' && inputs[i].checked == false){
-                alert(inputs[i].name + " must be selected to proceed");
-                //alert(instance_obj.id)
-                return false;
+    // Function to show custom error messages
+    function showCustomError(pageType, errorType, fieldName = '') {
+        let message = '';
+        
+        switch (pageType) {
+            case 'consent':
+                message = 'As you do not wish to participate in this study, please return your submission on Prolific by selecting the \'Stop without completing\' button.';
+                break;
+            case 'screener':
+                message = 'You are ineligible for this study as you have provided information which is inconsistent with your Prolific prescreening responses. Please return your submission on Prolific by selecting the \'Stop without completing\' button.';
+                break;
+            case 'comprehension':
+                message = 'You must correctly answer both comprehension check questions to proceed.';
+                break;
+            default:
+                if (errorType === 'right_label') {
+                    message = fieldName + " must be selected to proceed";
+                } else if (errorType === 'required') {
+                    message = "You must answer the following item to proceed: " + fieldName;
+                } else {
+                    message = fieldName + " must be completed to proceed";
+                }
+        }
+        
+        alert(message);
+    }
+
+    const pageType = getPageType();
+
+    // Check if all the right labels are checked
+    var inputs = document.querySelectorAll('input[validation=right_label]');
+    for (var i = 0; i < inputs.length; ++i) {
+        if (inputs[i].getAttribute('validation') == 'right_label' && inputs[i].checked == false) {
+            showCustomError(pageType, 'right_label', inputs[i].name);
+            return false;
+        }
+    }
+
+    // Identify all the fieldsets and check if all the required forms are filled
+    var fields = document.getElementsByTagName('fieldset');
+    for (var i = 0; i < fields.length; ++i) {
+        var inputs = fields[i].querySelectorAll('input[validation=required], select[validation=required], textarea[validation=required]');
+        
+        // Continue if there's no required inputs in the current field set
+        if (inputs.length == 0) {
+            continue;
+        }
+
+        checked_flag = false;
+        
+        for (var j = 0; j < inputs.length; ++j) {
+            // If the input is for a span annotation schema, check if at least some span is annotated
+            // or if the bad_text label is selected
+            if (inputs[j].getAttribute("for_span") == "True") {
+                if ($(".span_container [data-schema=\"" + inputs[j].className + "\"]").length > 0) {
+                    checked_flag = true;
+                    break;
+                } else if (inputs[j].name.slice(-8) == "bad_text" && inputs[j].checked == true) {
+                    checked_flag = true;
+                    break;
+                }
             }
-          }
-
-
-          // identify all the fieldsets and check if all the required forms are filled
-          var fields = document.getElementsByTagName('fieldset');
-          for (var i = 0; i < fields.length; ++i) {
-                var inputs = fields[i].querySelectorAll('input[validation=required], select[validation=required], textarea[validation=required]');
-
-                // continue if all there's no required inputs in the current field set
-                if (inputs.length == 0){
-                    continue;
-                }
-                //var required = true;
-                // check if the current form requires inputs
-                //if (inputs[0].getAttribute('validation') == 'required'){
-                //    required= true;
-                //}
-
-
-                checked_flag = false;
-                for (var j = 0; j < inputs.length; ++j) {
-                    // if a right_label is not selected, display an error msg and return false
-                    //if (inputs[j].getAttribute('validation') == 'right_label' && inputs[j].checked == false) {
-                    //    alert(inputs[j].name + " must be selected to proceed");
-                        //alert(instance_obj.id)
-                    //    return false;
-                    //}
-                    // if the input is for a span annotation schema, check if the at least some span is annotated or if the
-                    // bad_text label is selected
-                    if (inputs[j].getAttribute("for_span") == "True"){
-                        //alert($(".span_container").length);
-                        if ($(".span_container [data-schema=\"" + inputs[j].className + "\"]").length > 0) {
-                            checked_flag = true;
-                            break;
-                        } else if (inputs[j].name.slice(-8) == "bad_text" && inputs[j].checked == true){
-                            checked_flag = true;
-                            break;
-                        }
-                    }
-
-
-                    // if any of the labels is checked, set checked_flag as true;
-                    if (inputs[j].getAttribute("for_span") != "True" && inputs[j].checked == true) {
-
-                        checked_flag = true;
-                        break;
-                    }
-
-                    // if the input_type is number, text, select or textarea, check if it's empty
-                    // todo: the current way might not work well if there are mixed textinput and radio buttons under a sample fieldset
-                    if (inputs[j].type == "text" || inputs[j].tagName == "TEXTAREA" || inputs[j].type == "number" || inputs[j].type == "select-one") {
-                        if (inputs[j].value.length == 0){
-                            alert(inputs[j].name + " must be completed to proceed");
-                            return false;
-                        }
-                        else{
-                            checked_flag = true;
-                        }
-                    }
-                }
-
-
-                // if this form requires inputs, but nothing is checked, display an error msg and return false
-                if (checked_flag == false){
-                    alert("You must answer the following item to proceed: " + inputs[0].className);
+            
+            // If any of the labels is checked, set checked_flag as true
+            if (inputs[j].getAttribute("for_span") != "True" && inputs[j].checked == true) {
+                checked_flag = true;
+                break;
+            }
+            
+            // If the input_type is number, text, select or textarea, check if it's empty
+            if (inputs[j].type == "text" || inputs[j].tagName == "TEXTAREA" || inputs[j].type == "number" || inputs[j].type == "select-one") {
+                if (inputs[j].value.length == 0) {
+                    showCustomError(pageType, 'text_required', inputs[j].name);
                     return false;
+                } else {
+                    checked_flag = true;
                 }
-                //alert(instance_obj.id)
-          }
-          return true;
-      }
+            }
+        }
+        
+        // If this form requires inputs, but nothing is checked, display custom error msg and return false
+        if (checked_flag == false) {
+            showCustomError(pageType, 'required', inputs[0].className);
+            return false;
+        }
+    }
+    
+    return true;
+}
 
 
       /**

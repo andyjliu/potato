@@ -122,16 +122,15 @@ def generate_radio_layout(annotation_scheme, horizontal=False):
         if horizontal:
             br_label = ""
         schematic += (
-            '      <input class="%s" type="radio" id="%s" name="%s" value="%s" onclick="onlyOne(this)" validation="%s">'
-            + '  <label for="%s" %s>%s</label>%s'
+            '      <label for="%s" %s><input class="%s" type="radio" id="%s" name="%s" value="%s" onclick="onlyOne(this)" validation="%s">%s</label>%s'
         ) % (
+            name,
+            tooltip,
             class_name,
             name,
             name,
             key_value,
             "right_label" if label in right_label else final_validation,
-            name,
-            tooltip,
             label_content,
             br_label,
         )
