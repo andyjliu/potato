@@ -87,6 +87,47 @@
                 margin: 5px;
             }
 
+/* ===== RADIO BUTTON FIX FOR POTATO ===== */
+            /* Put radio buttons on the LEFT side of text */
+            
+            .annotation-form.radio label,
+            fieldset label {
+                display: flex !important;
+                align-items: flex-start !important;
+                text-align: left !important;
+                width: 100% !important;
+                margin-bottom: 10px !important;
+                flex-direction: row !important;
+            }
+
+            .annotation-form.radio input[type="radio"],
+            fieldset input[type="radio"] {
+                margin-right: 10px !important;
+                margin-left: 0 !important;
+                margin-top: 2px !important;
+                flex-shrink: 0 !important;
+                /* Remove the order property to keep natural left-to-right flow */
+            }
+
+            /* Additional specificity for stubborn cases */
+            form fieldset label {
+                display: flex !important;
+                align-items: flex-start !important;
+                text-align: left !important;
+            }
+
+            form fieldset input[type="radio"] {
+                margin-right: 10px !important;
+                margin-left: 0 !important;
+                margin-top: 2px !important;
+                flex-shrink: 0 !important;
+            }
+
+            /* Ensure the label text flows naturally after the radio button */
+            fieldset label > input[type="radio"] + * {
+                flex: 1;
+            }
+            /* ===== END RADIO BUTTON FIX ===== */
 
             .likert li {
                 float: left;

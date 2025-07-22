@@ -40,10 +40,10 @@
     "on": True,
     "order": ["pre_annotation", "post_annotation"],
     "pre_annotation": [
-        "surveyflow/comprehension_check.jsonl",
-        "surveyflow/instructions.jsonl", 
-        "surveyflow/screener.jsonl", 
-        "surveyflow/consent.jsonl"
+        {"file": "surveyflow/comprehension_check.jsonl", "text": "Comprehension Check"},
+        {"file": "surveyflow/instructions.jsonl", "text": "Study Instructions"},
+        {"file": "surveyflow/screener.jsonl", "text": "Screener Validation"},
+        {"file": "surveyflow/consent.jsonl", "text": "Consent Form"}
     ],
     "post_annotation": ["surveyflow/end.jsonl"]
 },
