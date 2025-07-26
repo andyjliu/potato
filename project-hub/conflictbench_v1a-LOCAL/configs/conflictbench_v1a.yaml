@@ -45,16 +45,17 @@
         {"file": "surveyflow/screener.jsonl", "text": "Screener Validation"},
         {"file": "surveyflow/consent.jsonl", "text": "Consent Form"}
     ],
-    "post_annotation": ["surveyflow/end.jsonl"]
+    "post_annotation": ["surveyflow/end.jsonl"],
 },
 
     "automatic_assignment": {
-      "on": False,  # Disable for local testing
+      "on": False,  # Disable for local testing 
+      # TODO: REENABLE!!
       "output_filename": 'task_assignment.json',
       "sampling_strategy": 'random',
       "labels_per_instance": 1,
       "instance_per_annotator": 10,
-      "test_question_per_annotator": 0,
+      "test_question_per_annotator": 1,
       "users": [],
     },
 
