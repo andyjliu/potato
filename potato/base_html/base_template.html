@@ -427,7 +427,53 @@
         alert(message);
     }
 
+    // Function to get the text associated with an input element
+    function getInputText(input) {
+        // Check if input is inside a label
+        const parentLabel = input.closest('label');
+        if (parentLabel) {
+            return parentLabel.textContent.trim();
+        }
+        
+        // Check for associated label using 'for' attribute
+        if (input.id) {
+            const associatedLabel = document.querySelector(`label[for="${input.id}"]`);
+            if (associatedLabel) {
+                return associatedLabel.textContent.trim();
+            }
+        }
+        
+        // Check siblings or nearby text
+        const nextSibling = input.nextSibling;
+        if (nextSibling && nextSibling.nodeType === Node.TEXT_NODE) {
+            return nextSibling.textContent.trim();
+        }
+        
+        const nextElement = input.nextElementSibling;
+        if (nextElement) {
+            return nextElement.textContent.trim();
+        }
+        
+        // Check parent element text
+        const parent = input.parentElement;
+        if (parent) {
+            return parent.textContent.trim();
+        }
+        
+        return '';
+    }
+
     const pageType = getPageType();
+
+    // Check if "None of These" option is selected
+    var checkedInputs = document.querySelectorAll('input:checked');
+    for (var i = 0; i < checkedInputs.length; ++i) {
+        const inputText = getInputText(checkedInputs[i]);
+        if (inputText.toLowerCase().includes('none of these')) {
+            showCustomError(pageType, 'right_label', checkedInputs[i].name);
+            return false;
+        }
+    }
 
     // Check if all the right labels are checked
     var inputs = document.querySelectorAll('input[validation=right_label]');
