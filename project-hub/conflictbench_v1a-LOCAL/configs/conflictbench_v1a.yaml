@@ -55,7 +55,7 @@
       "sampling_strategy": 'random',
       "labels_per_instance": 1,
       "instance_per_annotator": 10,
-      "test_question_per_annotator": 1,
+      "test_question_per_annotator": 2,
       "users": [],
     },
 
