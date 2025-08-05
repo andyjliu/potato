@@ -1,5 +1,6 @@
 {
-    "port": 8000,
+    "port": 80,
+    "host": "0.0.0.0", 
 
     "server_name": "AI Ethics Scenario Evaluator",
 
