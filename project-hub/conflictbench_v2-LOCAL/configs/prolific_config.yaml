@@ -1,0 +1,6 @@
+{
+    "token": 'your_prolific_token_here',
+    "study_id": 'your_study_id_here',
+    "max_concurrent_sessions": 10,
+    "workload_checker_period": 60
+}
