@@ -54,3 +54,4 @@ docs/_build/
 venv/
 project-hub/*/annotation_output/*
 potato/templates/*
+project-hub/COMPLETED/*/annotation_output/*
