@@ -1,0 +1,129 @@
+{
+    "port": 3000,
+    "host": "0.0.0.0", 
+
+    "server_name": "AI Ethics Scenario Evaluator v1b",
+
+    "annotation_task_name": "AI Ethics Scenario Evaluation v1b",
+
+    "output_annotation_dir": "annotation_output/ai_ethics",
+    "output_annotation_format": "tsv",
+    "annotation_codebook_url": "",
+
+    "data_files": [
+       "data_files/pilot_data.csv"
+    ],
+
+    "item_properties": {
+        "id_key": "id",
+        "text_key": "text",
+    },
+
+    "user_config": {
+      "allow_all_users": True,
+      "users": [],
+    },
+
+    "prolific": {
+        "config_file_path": 'configs/prolific_config.yaml'
+    },
+
+    "login": {
+       "type": 'prolific',
+    },
+
+    "jumping_to_id_disabled": True,
+    "hide_navbar": True,
+
+    "surveyflow": {
+    "on": True,
+    "order": ["pre_annotation", "post_annotation"],
+    "pre_annotation": [
+        {"file": "surveyflow/consent.jsonl", "text": "Consent Form"},
+        {"file": "surveyflow/screener.jsonl", "text": "Screener Validation"},
+        {"file": "surveyflow/instructions.jsonl", "text": "Study Instructions"},
+        {"file": "surveyflow/comprehension_check.jsonl", "text": "Comprehension Check"}
+    ],
+    "post_annotation": ["surveyflow/end.jsonl"],
+},
+
+    "automatic_assignment": {
+      "on": True,
+      "output_filename": 'task_assignment.json',
+      "sampling_strategy": 'random',
+      "labels_per_instance": 3,
+      "instance_per_annotator": 10,
+      "test_question_per_annotator": 2,
+      "users": [],
+    },
+
+    "alert_time_each_instance": 10000000,
+    "horizontal_key_bindings": true,
+
+    "annotation_schemes": [
+        {
+            "annotation_type": "likert",
+            "name": "Value Alignment 1",
+            "description": "Which Candidate Chatbot Action would Value 1 support in this situation? A value supports a candidate action in a scenario if someone who believed in always upholding this value, and prioritizes it above all other values, would prefer the action to the alternative",
+            "labels": [
+                { "name": "Value 1 Strongly Supports Action A", "key_value": '1' },
+                { "name": "Value 1 Somewhat Supports Action A", "key_value": '2' },
+                { "name": "Value 1 is Ambivalent", "key_value": '3' },
+                { "name": "Value 1 Somewhat Supports Action B", "key_value": '4' },
+                { "name": "Value 1 Strongly Supports Action B", "key_value": '5' }
+            ],
+            "label_requirement": {"required": True},
+            "displaying_score": True,
+        },
+        {
+            "annotation_type": "likert",
+            "name": "Value Alignment 2",
+            "description": "Which Candidate Chatbot Action would Value 2 support in this situation? A value supports a candidate action in a scenario if someone who believed in always upholding this value, and prioritizes it above all other values, would prefer the action to the alternative.",
+            "labels": [
+                { "name": "Value 2 Strongly Supports Action A", "key_value": '1' },
+                { "name": "Value 2 Somewhat Supports Action A", "key_value": '2' },
+                { "name": "Value 2 is Ambivalent", "key_value": '3' },
+                { "name": "Value 2 Somewhat Supports Action B", "key_value": '4' },
+                { "name": "Value 2 Strongly Supports Action B", "key_value": '5' }
+            ],
+            "label_requirement": {"required": True},
+            "displaying_score": True,
+        },
+        {
+            "annotation_type": "radio",
+            "name": "Preference",
+            "description": "Would you personally prefer if the chatbot was programmed to take Candidate Action A or Candidate Action B in this scenario?",
+            "labels": [
+                { "name": "Prefer A (It would be better if the chatbot took Action A)", "key_value": '1' },
+                { "name": "Prefer B (It would be better if the chatbot took Action B)", "key_value": '2' }
+            ],
+            "label_requirement": {"required": True},
+        },
+        {
+            "annotation_type": "likert",
+            "name": "Confidence",
+            "description": "How confident are you that it would be better if the chatbot was programmed to take your above choice in this scenario? Keep in mind that the chatbot may interact with a wide range of users with different backgrounds, beliefs, and values.",
+            "labels": [
+                { "name": "Very Uncertain (I'm really unsure as to which is better or don't have a preference)", "key_value": '1' },
+                { "name": "Somewhat Uncertain (I lean towards my choice, but don't feel strongly)", "key_value": '2' },
+                { "name": "Moderately Confident (I think my choice is better)", "key_value": '3' },
+                { "name": "Very Confident (I'm quite sure that my choice is significantly better)", "key_value": '4' },
+                { "name": "Extremely Confident (I'm sure my choice is clearly better, and that any reasonable person would agree with me)", "key_value": '5' }
+            ],
+            "label_requirement": {"required": True},
+            "displaying_score": True,
+        },
+        {
+            "annotation_type": "text",
+            "name": "Difficult Dimension",
+            "description": "Choose the dimension that was difficult to evaluate, or that you spent the most time thinking about for this scenario, and explain why you gave the rating you did for that dimension.",
+            "label_requirement": {"required": True},
+        },
+    ],
+
+    "html_layout": "templates/scenario_layout.html",
+    "surveyflow_html_layout": "default",
+    "base_html_template": "default",
+    "header_file": "default",
+    "site_dir": "default"
+}

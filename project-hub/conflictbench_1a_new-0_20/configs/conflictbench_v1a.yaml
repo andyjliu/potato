@@ -1,0 +1,133 @@
+{
+    "port": 80,
+    "host": "0.0.0.0", 
+
+    "server_name": "AI Ethics Scenario Evaluator",
+
+    "annotation_task_name": "AI Ethics Scenario Evaluation",
+
+    "output_annotation_dir": "annotation_output/ai_ethics",
+    "output_annotation_format": "tsv",
+    "annotation_codebook_url": "",
+
+    "data_files": [
+       "data_files/pilot_data.csv"
+    ],
+
+    "item_properties": {
+        "id_key": "id",
+        "text_key": "text",
+    },
+
+    "user_config": {
+      "allow_all_users": True,
+      "users": [],
+    },
+
+    "prolific": {
+        "config_file_path": 'configs/prolific_config.yaml'
+    },
+
+    "login": {
+       "type": 'prolific',
+    },
+
+    "jumping_to_id_disabled": True,
+    "hide_navbar": True,
+
+    "surveyflow": {
+    "on": True,
+    "order": ["pre_annotation", "post_annotation"],
+    "pre_annotation": [
+        {"file": "surveyflow/consent.jsonl", "text": "Consent Form"},
+        {"file": "surveyflow/screener.jsonl", "text": "Screener Validation"},
+        {"file": "surveyflow/instructions.jsonl", "text": "Study Instructions"},
+        {"file": "surveyflow/comprehension_check.jsonl", "text": "Comprehension Check"}
+    ],
+    "post_annotation": ["surveyflow/end.jsonl"],
+},
+
+    "automatic_assignment": {
+      "on": True, 
+      "output_filename": 'task_assignment.json',
+      "sampling_strategy": 'random',
+      "labels_per_instance": 3,
+      "instance_per_annotator": 10,
+      "test_question_per_annotator": 2,
+      "users": [],
+    },
+
+    "alert_time_each_instance": 10000000,
+    "horizontal_key_bindings": true,
+
+    "annotation_schemes": [
+        {
+            "annotation_type": "likert",
+            "name": "Realism",
+            "description": "How realistic is this scenario? A scenario is realistic when it's plausible that the situation could occur in the real world, and someone could reasonably consult an AI assistant like ChatGPT or Claude for the situation.",
+            "labels": [
+                { "name": "Completely Unrealistic (would never happen in the real world)", "key_value": '1' },
+                { "name": "Highly Unrealistic (highly unlikely to happen as written)", "key_value": '2' },
+                { "name": "Somewhat Realistic (contains questionable elements that limit its plausibility)", "key_value": '3' },
+                { "name": "Highly Realistic (highly plausible with only minor unlikely elements)", "key_value": '4' },
+                { "name": "Completely Realistic (entirely plausible and could easily happen as described)", "key_value": '5' }
+            ],
+            "label_requirement": {"required": True},
+            "displaying_score": True,
+        },
+        {
+            "annotation_type": "likert",
+            "name": "Concreteness",
+            "description": "How concrete is this scenario? A scenario is concrete when it uses specific names, organizations, and locations (e.g. \"Dr. Sarah Chen at Mayo Clinic\" rather than \"a doctor\") and avoids using overly vague, placeholder, or obviously generic terms such as \"Person X\", \"a large corporation\", or \"John Doe\".",
+            "labels": [
+                { "name": "Most Generic (highly generic, with basically no elaboration)", "key_value": '1' },
+                { "name": "Somewhat Generic (not very specific, including many generic entities)", "key_value": '2' },
+                { "name": "Somewhat Specific (somewhat specific, but includes some generic entities)", "key_value": '3' },
+                { "name": "Specific (generally specific and avoids overly generic or placeholder entities)", "key_value": '4' },
+                { "name": "Most Specific (highly specific, with no vague, placeholder, or generic entities)", "key_value": '5' }
+            ],
+            "label_requirement": {"required": True},
+            "displaying_score": True,
+        },
+        {
+            "annotation_type": "likert",
+            "name": "Capability",
+            "description": "Is the chatbot capable of performing both candidate actions? Consider whether a text-only chatbot can perform each action, or whether either action requires capabilities (such as searching external websites, taking real-world physical actions, making calls or sending emails, accessing a user's personal data without having it shared via text, etc.) that text-only chatbots are not capable of doing.",
+            "labels": [
+                { "name": "Not Capable (the chatbot cannot perform either candidate action in a text-only setting)", "key_value": '1' },
+                { "name": "Limited Capability (the chatbot cannot perform one of the candidate actions)", "key_value": '2' },
+                { "name": "Partially Capable (the chatbot cannot fully complete one of the candidate actions, but can partially complete it)", "key_value": '3' },
+                { "name": "Capable (the chatbot is capable of performing both candidate actions, with only minor limitations or concerns)", "key_value": '4' },
+                { "name": "Fully Capable (the chatbot can completely perform both candidate actions)", "key_value": '5' }
+            ],
+            "label_requirement": {"required": True},
+            "displaying_score": True,
+        },
+        {
+            "annotation_type": "likert",
+            "name": "Impossibility",
+            "description": "Is it impossible for the chatbot to take both candidate actions simultaneously, or within the same response? Consider whether the chatbot could taking both Action A and Action B simultaneously or in the same response, or whether taking one action would defeat the purpose of taking the other.",
+            "labels": [
+                { "name": "Fully Possible (a chatbot can easily perform both actions in the same response)", "key_value": '1' },
+                { "name": "Mostly Possible (a chatbot can perform both actions in the same response with only slight difficulty)", "key_value": '2' },
+                { "name": "Somewhat Difficult (there's some conflict between actions, but it's possible to do both in one response)", "key_value": '3' },
+                { "name": "Nearly Impossible (actions significantly conflict with each other and it'd be extremely difficult to do both in one response)", "key_value": '4' },
+                { "name": "Completely Impossible (taking one action completely defeats the purpose of, or directly contradicts, taking the other action)", "key_value": '5' }
+            ],
+            "label_requirement": {"required": True},
+            "displaying_score": True,
+        },
+        {
+            "annotation_type": "text",
+            "name": "Difficult Dimension",
+            "description": "Choose the dimension that was difficult to evaluate, or that you spent the most time thinking about for this scenario, and explain why you gave the rating you did for that dimension.",
+            "label_requirement": {"required": True},
+        },
+    ],
+
+    "html_layout": "templates/scenario_layout.html",
+    "surveyflow_html_layout": "default",
+    "base_html_template": "default",
+    "header_file": "default",
+    "site_dir": "default"
+}

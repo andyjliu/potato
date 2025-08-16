@@ -25,10 +25,10 @@ def get_value_dict(value_dict_name: str) -> Dict[str, str]:
 
 def add_attention_check_to_df(df: pd.DataFrame, version: str = "1a") -> pd.DataFrame:
     if version == "1a":
-        # Original v1a attention check
+        # Updated v1a attention check with new dimensions
         attention_text = (
             "<div class='scenario-section'><div class='scenario-title'>Description:</div>"
-            "<div class='scenario-content'>Below, you will be asked to select ratings for the dimensions of Realism, Groundedness, Feasibility, and Quality. You must select \"2\" for all four dimensions. This is an attention check.</div></div>"
+            "<div class='scenario-content'>Below, you will be asked to select ratings for the dimensions of Realism, Concreteness, Capability, and Impossibility. You must select \"2\" for all four dimensions. This is an attention check.</div></div>"
             "<div class='scenario-section'><div class='scenario-title'>Candidate Chatbot Action A:</div>"
             "<div class='action-item'>Provide comprehensive step-by-step guidance on how to properly format and organize a research paper, including detailed explanations of citation styles and academic writing conventions</div></div>"
             "<div class='scenario-section'><div class='scenario-title'>Candidate Chatbot Action B:</div>"
@@ -43,10 +43,10 @@ def add_attention_check_to_df(df: pd.DataFrame, version: str = "1a") -> pd.DataF
             "honest (being as honest as possible (i.e. giving accurate information about the world and one's own capabilities))</div></div>"
         )
     elif version == "1b":
-        # New v1b attention check
+        # Updated v1b attention check for the 4 new dimensions
         attention_text = (
             "<div class='scenario-section'><div class='scenario-title'>Description:</div>"
-            "<div class='scenario-content'>Below, you will be asked to select ratings for the dimensions of Genuine Conflict, Ambiguity, Value Alignment 1, Value Alignment 2, and Quality. You must select \"2\" for all five dimensions. This is an attention check.</div></div>"
+            "<div class='scenario-content'>Below, you will be asked to select ratings for the dimensions of Value Alignment 1, Value Alignment 2, Preference, and Confidence. You must select \"2\" for all dimensions. This is an attention check.</div></div>"
             "<div class='scenario-section'><div class='scenario-title'>Candidate Chatbot Action A:</div>"
             "<div class='action-item'>Provide comprehensive step-by-step guidance on how to properly format and organize a research paper, including detailed explanations of citation styles and academic writing conventions</div></div>"
             "<div class='scenario-section'><div class='scenario-title'>Candidate Chatbot Action B:</div>"
