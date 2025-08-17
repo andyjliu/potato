@@ -44,7 +44,10 @@
         {"file": "surveyflow/instructions.jsonl", "text": "Study Instructions"},
         {"file": "surveyflow/comprehension_check.jsonl", "text": "Comprehension Check"}
     ],
-    "post_annotation": ["surveyflow/end.jsonl"],
+    "post_annotation": [
+        {"file": "surveyflow/feedback.jsonl", "text": "Feedback"},
+        {"file": "surveyflow/end.jsonl", "text": "End of Survey"}
+    ],
 },
 
     "automatic_assignment": {
@@ -64,13 +67,13 @@
         {
             "annotation_type": "likert",
             "name": "Value Alignment 1",
-            "description": "Which Candidate Chatbot Action would Value 1 support in this situation? A value supports a candidate action in a scenario if someone who believed in always upholding this value, and prioritizes it above all other values, would prefer the action to the alternative",
+            "description": "Which Candidate Chatbot Action would Value 1 support in this situation?",
             "labels": [
-                { "name": "Value 1 Strongly Supports Action A", "key_value": '1' },
-                { "name": "Value 1 Somewhat Supports Action A", "key_value": '2' },
-                { "name": "Value 1 is Ambivalent", "key_value": '3' },
-                { "name": "Value 1 Somewhat Supports Action B", "key_value": '4' },
-                { "name": "Value 1 Strongly Supports Action B", "key_value": '5' }
+                { "name": " Value 1 Strongly Supports Action A", "key_value": '1' },
+                { "name": " Value 1 Somewhat Supports Action A", "key_value": '2' },
+                { "name": " Value 1 is Ambivalent", "key_value": '3' },
+                { "name": " Value 1 Somewhat Supports Action B", "key_value": '4' },
+                { "name": " Value 1 Strongly Supports Action B", "key_value": '5' }
             ],
             "label_requirement": {"required": True},
             "displaying_score": True,
@@ -78,13 +81,13 @@
         {
             "annotation_type": "likert",
             "name": "Value Alignment 2",
-            "description": "Which Candidate Chatbot Action would Value 2 support in this situation? A value supports a candidate action in a scenario if someone who believed in always upholding this value, and prioritizes it above all other values, would prefer the action to the alternative.",
+            "description": "Which Candidate Chatbot Action would Value 2 support in this situation?",
             "labels": [
-                { "name": "Value 2 Strongly Supports Action A", "key_value": '1' },
-                { "name": "Value 2 Somewhat Supports Action A", "key_value": '2' },
-                { "name": "Value 2 is Ambivalent", "key_value": '3' },
-                { "name": "Value 2 Somewhat Supports Action B", "key_value": '4' },
-                { "name": "Value 2 Strongly Supports Action B", "key_value": '5' }
+                { "name": " Value 2 Strongly Supports Action A", "key_value": '1' },
+                { "name": " Value 2 Somewhat Supports Action A", "key_value": '2' },
+                { "name": " Value 2 is Ambivalent", "key_value": '3' },
+                { "name": " Value 2 Somewhat Supports Action B", "key_value": '4' },
+                { "name": " Value 2 Strongly Supports Action B", "key_value": '5' }
             ],
             "label_requirement": {"required": True},
             "displaying_score": True,
@@ -102,13 +105,13 @@
         {
             "annotation_type": "likert",
             "name": "Confidence",
-            "description": "How confident are you that it would be better if the chatbot was programmed to take your above choice in this scenario? Keep in mind that the chatbot may interact with a wide range of users with different backgrounds, beliefs, and values.",
+            "description": "How confident are you that it would be better if the chatbot was programmed to take your above choice in this scenario?",
             "labels": [
-                { "name": "Very Uncertain (I'm really unsure as to which is better or don't have a preference)", "key_value": '1' },
-                { "name": "Somewhat Uncertain (I lean towards my choice, but don't feel strongly)", "key_value": '2' },
-                { "name": "Moderately Confident (I think my choice is better)", "key_value": '3' },
-                { "name": "Very Confident (I'm quite sure that my choice is significantly better)", "key_value": '4' },
-                { "name": "Extremely Confident (I'm sure my choice is clearly better, and that any reasonable person would agree with me)", "key_value": '5' }
+                { "name": " Very Uncertain (I'm really unsure as to which is better or don't have a preference)", "key_value": '1' },
+                { "name": " Somewhat Uncertain (I lean towards my choice, but don't feel strongly)", "key_value": '2' },
+                { "name": " Moderately Confident (I think my choice is better)", "key_value": '3' },
+                { "name": " Very Confident (I'm quite sure that my choice is significantly better)", "key_value": '4' },
+                { "name": " Extremely Confident (I'm sure my choice is clearly better, and that any reasonable person would agree with me)", "key_value": '5' }
             ],
             "label_requirement": {"required": True},
             "displaying_score": True,
@@ -116,8 +119,11 @@
         {
             "annotation_type": "text",
             "name": "Difficult Dimension",
-            "description": "Choose the dimension that was difficult to evaluate, or that you spent the most time thinking about for this scenario, and explain why you gave the rating you did for that dimension.",
+            "description": "Choose the dimension that was most difficult to evaluate, or that you spent the most time thinking about for this scenario, and explain why you gave the rating you did for that dimension.",
             "label_requirement": {"required": True},
+            "textarea": {
+                "on": True,
+            }
         },
     ],
 
